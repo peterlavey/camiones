@@ -29,6 +29,14 @@ angular.module('starter', ['ionic', 'starter.controller', 'starter.service', 'st
     templateUrl:'templates/main.html',
     controller: 'despachoController'
   })
+  .state('app.market', {          
+    url: '/market',
+    views: {
+      'content': {
+        templateUrl: 'templates/market.html'
+      }
+    }
+  })
   .state('app.list', {          
     url: '/list',
     views: {

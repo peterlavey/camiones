@@ -1,0 +1,13 @@
+<form>
+	<div ng-repeat="despacho in despachos | orderBy: '+estado'" class="list card">
+		<a ng-click="seleccionaDespacho({{despacho}})" class="item item-avatar state-{{despacho.estado}}" href="#/app/single">
+			<img src="img/ionic.png">
+			<p class="single-date">{{despacho.fechas.entrega}}</p>
+		    <h2 class="title text-bold" ng-init="despacho.nombreEstado=nombreEstado(despacho)">{{despacho.nombre}}
+		    	- <span style="color:red">{{despacho.nombreEstado}}</span>
+		    </h2>
+		    <p class="subtitle">{{despacho.direccion.descripcion}}</p>
+		    <p>{{despacho.descripcion}}</p>
+	  	</a>
+	</div>
+</form>

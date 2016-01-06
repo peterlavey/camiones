@@ -1,0 +1,40 @@
+/* Empty. Add your own CSS if you like */
+.scroll{
+	height: 100%;
+}
+
+#map{
+	height: 100%;
+	width: 100%;
+}
+.text-bold{
+	font-weight: bold !important;
+}
+
+.subtitle{
+	color:blue !important;
+}
+
+.state-1{
+	background-color: rgba(193, 255, 177, 0.58);
+}
+
+.state-2{
+	background-color: rgba(193, 200, 177, 0.58);
+}
+
+.state-3{
+	background-color: rgba(100, 255, 177, 0.58);
+}
+
+.state-4{
+	background-color: rgba(193, 255, 255, 0.58);
+}
+
+.single-date{
+	float: right;
+}
+
+.title{
+	max-width: 80%;
+}

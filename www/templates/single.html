@@ -1,0 +1,19 @@
+<form>
+
+	    <ion-list>
+	    	<ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap">
+				<p class="single-date">{{despacho.fechas.entrega}}</p>
+			    <h2 class="title text-bold">{{despacho.nombre}} 
+			    	- <span style="color:red">{{despacho.nombreEstado}}</span>
+			    </h2>
+			    <p class="subtitle">{{despacho.direccion.descripcion}}</p>
+			    <p>{{despacho.descripcion}}</p>
+			    <i class="icon ion-chevron-right icon-accessory"></i>
+				<ion-option-button class="button-assertive" ng-click="cambiarEstado()">
+		          {{despacho.nombreEstado}}
+		        </ion-option-button>
+	      </ion-item>	
+		</ion-list>
+
+	<div id="map" data-tap-disabled="true" elem-ready="setMap()"></div>
+</form>

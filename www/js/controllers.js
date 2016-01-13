@@ -1,19 +1,19 @@
 angular.module('starter.controller', [])
 
-.controller('LoginCtrl', function($scope, LoginService, $ionicPopup, $state) {
-    $scope.data = {};
- 
-    $scope.login = function() {
-        LoginService.loginUser($scope.data.username, $scope.data.password).success(function(data) {
-            $state.go('app.list');
-        }).error(function(data) {
-            var alertPopup = $ionicPopup.alert({
-                title: 'Login failed!',
-                template: 'Please check your credentials!'
-            });
-        });
-    }
-})	
+.controller('LoginCtrl', function ($scope, $http, $window, despachoService, $state) {
+ 	$scope.user =  {username: 'john.doe', password: 'foobar'};
+  	$scope.message = '';
+  	$scope.submit = function () {
+  		despachoService.login($scope.user).success(function (data, status, headers, config) {
+			$window.sessionStorage.token = data.token;
+	        $scope.message = 'Welcome';
+	        $state.go('app.list');
+	    }).error(function (data, status, headers, config) {
+	        delete $window.sessionStorage.token;
+	        $scope.message = 'Error: Invalid user or password';
+	    });
+	};
+})
 .controller('despachoController', ['$scope', '$rootScope', 'despachoService', '$filter',
 	function($scope, $rootScope, despachoService, $filter){
 

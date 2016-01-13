@@ -1,26 +1,23 @@
 angular.module('starter.service', [])
-.service('LoginService', function($q) {
-    return {
-        loginUser: function(name, pw) {
-            var deferred = $q.defer();
-            var promise = deferred.promise;
- 
-            if (name == 'admin' && pw == 'admin') {
-                deferred.resolve('Welcome ' + name + '!');
-            } else {
-                deferred.reject('Wrong credentials.');
-            }
-            promise.success = function(fn) {
-                promise.then(fn);
-                return promise;
-            }
-            promise.error = function(fn) {
-                promise.then(null, fn);
-                return promise;
-            }
-            return promise;
-        }
+.factory('authInterceptor', function ($rootScope, $q, $window) {
+  return {
+    request: function (config) {
+      config.headers = config.headers || {};
+      if ($window.sessionStorage.token) {
+        config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token;
+      }
+      return config;
+    },
+    response: function (response) {
+      if (response.status === 401) {
+        // handle the case where the user is not authenticated
+      }
+      return response || $q.when(response);
     }
+  };
+})
+.config(function ($httpProvider) {
+  $httpProvider.interceptors.push('authInterceptor');
 })
 .factory('despachoService', ['$http', function($http){
 	return{
@@ -29,6 +26,9 @@ angular.module('starter.service', [])
 		},
 		cambiarEstado:function(id, data){
 			return $http.put('http://localhost:3000/api/despacho/'+id, data);
-		}
+		},
+        login:function(user){
+            return $http.post('http://localhost:3000/api/usuario/'+user.username+'/'+user.password);
+        }
 	}
 }]);

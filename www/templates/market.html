@@ -1,7 +1,13 @@
 <form>
-	<div>
-		<a  class="item item-avatar" >
-			<h1>Mercado</h1>
+	<div ng-repeat="ruta in rutas" class="list card">
+		<a class="item item-avatar">
+			<img src="img/{{ruta.empresa.logo}}.jpg">
+			<h3>{{ruta.nombre}}</h3>
+			<p class="single-date">{{ruta.empresa.nombre}}</p>
+		    <p class="subtitle">{{ruta.direccion.descripcion}}</p>
+		    <p>${{ruta.oferta}}</p>
 	  	</a>
 	</div>
 </form>
+
+

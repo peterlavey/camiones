@@ -16,19 +16,19 @@
 }
 
 .state-1{
-	background-color: rgba(193, 255, 177, 0.58);
+	background-color: #BAC8F9;
 }
 
 .state-2{
-	background-color: rgba(193, 200, 177, 0.58);
+	background-color: #FFE585;
 }
 
 .state-3{
-	background-color: rgba(100, 255, 177, 0.58);
+	background-color: #5CFF8B;
 }
 
 .state-4{
-	background-color: rgba(193, 255, 255, 0.58);
+	background-color: #FFFFFF;
 }
 
 .single-date{
@@ -37,4 +37,8 @@
 
 .title{
 	max-width: 80%;
+}
+
+.single{
+	box-shadow: 1px 10px 10px 10px;
 }

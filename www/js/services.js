@@ -19,10 +19,16 @@ angular.module('starter.service', [])
 .config(function ($httpProvider) {
   $httpProvider.interceptors.push('authInterceptor');
 })
+.factory('MarketService', function ($http) {
+  return{
+    getRutas:function(){
+      return $http.get('http://localhost:3000/api/ruta');
+    }
+  }  
+}) 
 .factory('despachoService', ['$http', function($http){
 	return{
 		getDespachos:function(id){
-			//return $http.get('http://localhost:3000/api/despacho');
       return $http.get('http://localhost:3000/api/usuario/'+id);
 		},
 		cambiarEstado:function(id, data){

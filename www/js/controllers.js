@@ -7,6 +7,7 @@ angular.module('starter.controller', [])
   		despachoService.login($scope.user).success(function (data, status, headers, config) {
 			$window.sessionStorage.token = data.token;
 			$window.sessionStorage.usuario = data.usuario._id;
+			$window.sessionStorage.mensaje = "Hola ".concat(data.usuario.nombre? data.usuario.nombre : data.usuario.username);
 	        $scope.message = 'Welcome';
 	        $state.go('app.list');
 	    }).error(function (data, status, headers, config) {
@@ -15,9 +16,18 @@ angular.module('starter.controller', [])
 	    });
 	};
 })
+.controller('MarketCtrl', function ($scope, MarketService) {
+	$scope.getRutas=function(){
+		MarketService.getRutas().success(function(data){
+			$scope.rutas=data;
+		});
+	}	
+
+	$scope.getRutas();	
+})	
 .controller('despachoController', ['$scope', '$rootScope', 'despachoService', '$filter', '$window',
 	function($scope, $rootScope, despachoService, $filter, $window){
-
+	$scope.bienvenida=$window.sessionStorage.mensaje;
 	$scope.getDespachos=function(){
 		despachoService.getDespachos($window.sessionStorage.usuario).success(function(data){
 			$scope.despachos=data;
@@ -43,7 +53,9 @@ angular.module('starter.controller', [])
 	};
 
 	$scope.cambiarEstado=function(){
-		$scope.despacho.estado=$scope.despacho.estado+1;
+		if($scope.despacho.estado<5){
+			$scope.despacho.estado=$scope.despacho.estado+1;
+		}
 		despachoService.cambiarEstado($scope.despacho._id, $scope.despacho).success(function(data){
 			console.log("success!");
 			$scope.despacho.nombreEstado=$scope.nombreEstado($scope.despacho);
@@ -53,19 +65,19 @@ angular.module('starter.controller', [])
 	$scope.nombreEstado=function(despacho){
 		switch(despacho.estado){
 			case 1:
-				return "estado1";
+				return "En camino";
 			break;
 			case 2:
-				return "estado2";
+				return "Esperando...";
 			break;
 			case 3:
-				return "estado3";
+				return "Despachando";
 			break;
 			case 4:
-				return "estado4";
+				return "Terminado!";
 			break;
 			default:
-				return "estado1";
+				return "Terminado!";
 			break;
 		}
 	}

@@ -33,7 +33,8 @@ angular.module('starter', ['ionic', 'starter.controller', 'starter.service', 'st
     url: '/market',
     views: {
       'content': {
-        templateUrl: 'templates/market.html'
+        templateUrl: 'templates/market.html',
+        controller: 'MarketCtrl'
       }
     }
   })

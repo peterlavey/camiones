@@ -21,14 +21,15 @@ angular.module('starter.service', [])
 })
 .factory('despachoService', ['$http', function($http){
 	return{
-		getDespachos:function(){
-			return $http.get('http://localhost:3000/api/despacho');
+		getDespachos:function(id){
+			//return $http.get('http://localhost:3000/api/despacho');
+      return $http.get('http://localhost:3000/api/usuario/'+id);
 		},
 		cambiarEstado:function(id, data){
 			return $http.put('http://localhost:3000/api/despacho/'+id, data);
 		},
-        login:function(user){
-            return $http.post('http://localhost:3000/api/usuario/'+user.username+'/'+user.password);
-        }
+    login:function(user){
+        return $http.post('http://localhost:3000/api/usuario/'+user.username+'/'+user.password);
+    }
 	}
 }]);

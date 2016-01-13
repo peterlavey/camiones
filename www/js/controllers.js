@@ -1,11 +1,12 @@
 angular.module('starter.controller', [])
 
 .controller('LoginCtrl', function ($scope, $http, $window, despachoService, $state) {
- 	$scope.user =  {username: 'john.doe', password: 'foobar'};
+ 	$scope.user =  {username: 'admin', password: '123'};
   	$scope.message = '';
   	$scope.submit = function () {
   		despachoService.login($scope.user).success(function (data, status, headers, config) {
 			$window.sessionStorage.token = data.token;
+			$window.sessionStorage.usuario = data.usuario._id;
 	        $scope.message = 'Welcome';
 	        $state.go('app.list');
 	    }).error(function (data, status, headers, config) {
@@ -14,11 +15,11 @@ angular.module('starter.controller', [])
 	    });
 	};
 })
-.controller('despachoController', ['$scope', '$rootScope', 'despachoService', '$filter',
-	function($scope, $rootScope, despachoService, $filter){
+.controller('despachoController', ['$scope', '$rootScope', 'despachoService', '$filter', '$window',
+	function($scope, $rootScope, despachoService, $filter, $window){
 
 	$scope.getDespachos=function(){
-		despachoService.getDespachos().success(function(data){
+		despachoService.getDespachos($window.sessionStorage.usuario).success(function(data){
 			$scope.despachos=data;
 
 			angular.forEach($scope.despachos, function(value, key){

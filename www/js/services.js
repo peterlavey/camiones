@@ -22,20 +22,20 @@ angular.module('starter.service', [])
 .factory('MarketService', function ($http) {
   return{
     getRutas:function(){
-      return $http.get('http://localhost:3000/api/ruta');
+      return $http.get('https://peaceful-wildwood-5772.herokuapp.com/api/ruta');
     }
   }  
 }) 
 .factory('despachoService', ['$http', function($http){
 	return{
 		getDespachos:function(id){
-      return $http.get('http://localhost:3000/api/usuario/'+id);
+      return $http.get('https://peaceful-wildwood-5772.herokuapp.com/api/usuario/'+id);
 		},
 		cambiarEstado:function(id, data){
-			return $http.put('http://localhost:3000/api/despacho/'+id, data);
+			return $http.put('https://peaceful-wildwood-5772.herokuapp.com/api/despacho/'+id, data);
 		},
     login:function(user){
-        return $http.post('http://localhost:3000/api/usuario/'+user.username+'/'+user.password);
+        return $http.post('https://peaceful-wildwood-5772.herokuapp.com/api/usuario/'+user.username+'/'+user.password);
     }
 	}
 }]);
